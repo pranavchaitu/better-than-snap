@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+@import "uploadthing/tw/v4";
+@source "../../node_modules/@uploadthing/react/dist"; /** <-- depends on your project structure */
+
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
@@ -122,5 +125,9 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  button:not([disabled]),
+  [role="button"]:not([disabled]) {
+    cursor: pointer;
   }
 }

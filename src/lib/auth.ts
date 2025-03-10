@@ -1,6 +1,6 @@
 import NextAuth, { DefaultSession } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
-import client from "./db"
+import client from "@/lib/db"
 
 declare module "next-auth" {
   interface Session {
