@@ -28,7 +28,7 @@ model Post {
   id          String @id @default(uuid())
   // description String
   url         String
-  likeCount   Int?   @default(0)
+  likeCount   Int   @default(0)
   userID      String
   creator     User   @relation("UserCreatedPosts", fields: [userID], references: [id])
   savedBy     User[] @relation("UserSavedPosts")

@@ -11,7 +11,7 @@ export default function Home() {
   // const [url, setUrl] = useState("")
   const router = useRouter()
   return (
-    <div className="mt-24">
+    <div className="flex justify-center w-full">
       {/* { url.length ? (
         <div className="flex items-center justify-center">
           <Image
@@ -29,11 +29,11 @@ export default function Home() {
           onClientUploadComplete={(res) => {
             console.log("Files: ", res[0].size);
             // setUrl(res[0].ufsUrl)
-            toast.error("Upload Completed");
+            toast.success("Upload Completed");
             router.push('/home')
           }}
           onUploadError={(error: Error) => {
-            toast.success(`ERROR! ${error.message}`);
+            toast.error(`ERROR! ${error.message}`);
           }}
         />
       {/* )} */}
