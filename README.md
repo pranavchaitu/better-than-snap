@@ -1,3 +1,18 @@
+Feautures : 
+
+(Optional)
+    - followers/ following -> schema and functions
+    - fetch extra posts/ users on demand/ scroll
+    - profile edit
+(Next)
+    - learn transitions
+    - saved and like count
+    (today)
+    - user/ view profile
+    - photo showcase dialog
+    - user search
+    - gallery share
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

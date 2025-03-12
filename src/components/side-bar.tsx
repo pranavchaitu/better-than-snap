@@ -23,7 +23,7 @@ function SideBarItem({ icon, name} : {
     const path = usePathname()
     return (
         <Link href={`/${name}`}>
-            <div className={`${path.slice(1,) == name && "bg-gray-900" } rounded-lg cursor-pointer flex gap-2 p-4`} >
+            <div className={`${path.slice(1,) == name && "bg-gray-900 text-white" } rounded-lg cursor-pointer flex gap-2 p-4`} >
                 {icon}
                 <span>{name}</span>
             </div>

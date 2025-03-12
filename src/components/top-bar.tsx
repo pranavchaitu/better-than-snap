@@ -3,9 +3,9 @@
 import { signIn, signOut, useSession } from "next-auth/react"
 import { Button } from "./ui/button"
 import { ModeToggle } from "./mode-toggle"
-import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function TopBar() {
     const { data, status } = useSession()
@@ -18,13 +18,10 @@ export default function TopBar() {
                 </div>
             </Link>  
             <div className="flex items-center gap-2">
-                {data?.user && <Image 
-                    src={data?.user.image!}
-                    alt="user"
-                    width={35}
-                    height={35}
-                    className="rounded-full"
-                />}
+                <Avatar className="h-10 w-10 border">
+                    <AvatarImage src={data?.user.image || `/placeholder.svg?height=48&width=48`} alt={data?.user?.name!} />
+                    <AvatarFallback>{data?.user.name!.substring(0, 2).toUpperCase()}</AvatarFallback>
+                </Avatar>
                 {path != '/' && <ModeToggle />}
                 <Button onClick={() => data?.user ? signOut() : signIn()}>
                     {data?.user ? "Sign Out" :  "Sign in"}
