@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation"
 import { ReactNode } from "react"
 
 export function SideBar() {
-    return <div className="hidden sm:block">
-        <div className="top-30 bottom-52 rounded-r-3xl fixed w-36 flex flex-col justify-between">
+    return <div className="top-30 bottom-52 fixed -translate-x-10 opacity-0 transition-all duration-500 ease-in-out sm:translate-x-0 sm:opacity-100">
+        <div className="h-full rounded-r-3xl w-36 flex flex-col justify-between">
             <SideBarItem icon={<House />} name="home"/>
             <SideBarItem icon={<UsersRound />} name="people"/>
             <SideBarItem icon={<Bookmark />} name="saved"/>

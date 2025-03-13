@@ -32,14 +32,14 @@ export function UserProfileCard({
             <AvatarFallback>{username.substring(0, 2).toUpperCase()}</AvatarFallback>
           </Avatar>
           <div className="flex-1 space-y-1">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
               <div>
                 <h3 className="font-semibold leading-none">{username}</h3>
                 {/* <p className="text-sm text-muted-foreground">@{username}</p> */}
               </div>
               <Link href={`profile/${id}`}>
                 <Button variant={"default"} size="sm" className="gap-1">
-                  <span className="hidden sm:inline">Visit Profile</span>
+                  <span>Visit Profile</span>
                 </Button>
               </Link>
             </div>

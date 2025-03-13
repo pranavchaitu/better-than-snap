@@ -42,7 +42,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             console.log(error)
           }
         }
-        if(user) token.id = user?.id
+        if(user?.id) token.id = user?.id
       }
       return token
     },

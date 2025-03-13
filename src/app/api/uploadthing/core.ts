@@ -2,7 +2,6 @@ import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db"
-import { toast } from "sonner";
 
 const f = createUploadthing();
 

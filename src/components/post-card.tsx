@@ -1,17 +1,48 @@
 "use client";
 
+import { decreaseLikes, increaseLikes, savePost, unsavePost } from "@/lib/actions";
 import { Bookmark, Heart } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { toast } from "sonner";
 
-export function Post({ url, profileUrl, username } : {
+export function PostCard({ id, url, likeCount, profileUrl, username, isSaved } : {
+    id : string,
     url : string,
+    likeCount : number,
     profileUrl : string,
-    username : string
+    username : string,
+    isSaved : boolean
 }) {
     const [liked, setLiked] = useState(false)
-    const [saved, setSaved] = useState(false)
+    const [saved, setSaved] = useState(isSaved)
+    const [likes, setLikes] = useState(likeCount)
+    const likePost = async () => {
+        setLiked(true)
+        setLikes(likes+1)
+        await increaseLikes(id)
+        toast.success("Liked the post <3.")
+    }   
     
+    const dislikePost = async () => {
+        setLiked(false)
+        setLikes(likes-1)
+        await decreaseLikes(id)
+        toast.success("Disliked the post.")
+    }
+
+    const selectSave = async () => {
+        setSaved(true)
+        await savePost(id)
+        toast.success("Post Saved!")
+    }
+
+    const deselectSave = async () => {
+        setSaved(false)
+        await unsavePost(id)
+        toast.success("Post Unsaved!")
+    }
+
     return (
         <div>
             <div className="w-full group/card">
@@ -41,12 +72,17 @@ export function Post({ url, profileUrl, username } : {
                     </div>
                     <div className="absolute bottom-0 left-0 w-full opacity-0 translate-y-10 transition-all duration-300 ease-in-out group-hover/card:opacity-100 group-hover/card:translate-y-0">
                         <div className="flex p-4 justify-between bg-gray-900">
-                            <Heart 
-                                onClick={() => setLiked(!liked)} 
-                                className={`cursor-pointer transition-all duration-300 ${liked ? "text-red-500" : "text-white"}`}
-                            />
+                            <div className="space-x-2 flex items-center">
+                                <Heart 
+                                    onClick={liked ? dislikePost : likePost} 
+                                    className={`cursor-pointer transition-all duration-300 ${liked ? "text-red-500" : "text-white"}`}
+                                />
+                                <span>
+                                    {likes}
+                                </span>
+                            </div>
                             <Bookmark 
-                                onClick={() => setSaved(!saved)} 
+                                onClick={saved ? deselectSave : selectSave} 
                                 className={`cursor-pointer transition-all duration-300 ${saved ? "text-yellow-400" : "text-white"}`}
                             />
                         </div>

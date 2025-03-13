@@ -1,11 +1,8 @@
-"use client"
+import { PostCardList } from "@/components/ui/post-card-list"
+import { getAllSavedPosts } from "@/lib/actions"
 
-import { useSession } from "next-auth/react"
-
-export default function Home() {
-    const session = useSession()
-    return <>
-        to list all saved posts here <br/>
-        {/* {JSON.stringify(session)} */}
-    </>
+export default async function Home() {
+    const posts = await getAllSavedPosts()
+    return <PostCardList posts={posts!}/>
 }
+

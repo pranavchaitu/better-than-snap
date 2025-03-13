@@ -30,6 +30,7 @@ export default function RootLayout({
       <body
         className={`${bricolageGrotesque.className} antialiased`}
       >
+        <Toaster />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -37,7 +38,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SessionProvider>
-            <Toaster />
             <MaxWidthWrapper>
               <TopBar />
               <NextSSRPlugin

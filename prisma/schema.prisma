@@ -30,7 +30,7 @@ model Post {
   url         String
   likeCount   Int   @default(0)
   userID      String
-  creator     User   @relation("UserCreatedPosts", fields: [userID], references: [id])
+  creator     User   @relation("UserCreatedPosts", fields: [userID], references: [id], onDelete: Cascade)
   savedBy     User[] @relation("UserSavedPosts")
 }
 
