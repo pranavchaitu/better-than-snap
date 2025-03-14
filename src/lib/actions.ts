@@ -2,6 +2,30 @@
 
 import prisma from "@/lib/db"
 import { auth } from "./auth";
+import { CreateUserPayload } from "./types";
+
+export async function findUser(email : string) {
+    try {
+        const user = await prisma.user.findFirst({
+            where : {
+                email,
+            }
+        })
+        return user
+    } catch (error) {
+        return null
+    } 
+}
+
+export async function createUser(body : CreateUserPayload) {
+    return await prisma.user.create({
+        data : {
+            email : body.email,
+            profileUrl : body.profileUrl,
+            username : body.name
+        }
+    })
+}
 
 export async function getPosts() {
     const session = await auth()

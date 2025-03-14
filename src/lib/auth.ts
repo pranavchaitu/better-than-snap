@@ -1,6 +1,6 @@
 import NextAuth, { DefaultSession } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
-import client from "@/lib/db"
+import { createUser, findUser } from "./actions";
 
 declare module "next-auth" {
   interface Session {
@@ -24,27 +24,42 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks : {
     async jwt({ token,account,profile }) {
       if(account?.provider == 'google') {
-        let user = await client.user.findFirst({
-          where : {
-            email : profile?.email!
-          }
-        })
-        if(!user) { 
-          try {            
-            user = await client.user.create({
-              data : {
-                email : profile?.email!,
-                profileUrl : profile?.picture,
-                username : profile?.name!
-              }
-            })
-          } catch (error) {
-            console.log(error)
-          }
+        let currentUser = await findUser(profile?.email!)
+        if(currentUser) {
+          token.id = currentUser.id
+        } else {
+          let newUser = await createUser({
+            name : profile?.name!,
+            email : profile?.email!,
+            profileUrl : profile?.picture!
+          });
+          token.id = newUser.id
         }
-        if(user?.id) token.id = user?.id
       }
       return token
+      //   let user = await client.user.findFirst({
+      //     where : {
+      //       email : profile?.email!
+      //     }
+      //   })
+      //   if(!user?.id) { 
+      //     try {            
+      //       const newUser = await client.user.create({
+      //         data : {
+      //           email : profile?.email!,
+      //           profileUrl : profile?.picture,
+      //           username : profile?.name!
+      //         }
+      //       })
+      //       token.id = newUser.id
+      //     } catch (error) {
+      //       console.log(error)
+      //     }
+      //   } else {
+      //     token.id = user?.id
+      //   }
+      // }
+      // return token
     },
     session({ session,token } : any) {
       session.user.id = token.id
