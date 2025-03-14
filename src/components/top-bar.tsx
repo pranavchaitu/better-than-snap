@@ -7,6 +7,7 @@ import Link from "next/link"
 import { redirect, usePathname } from "next/navigation"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Loader2 } from "lucide-react"
+import { PageToggle } from "./page-toggle"
 
 export default function TopBar() {
     const { data, status } = useSession()
@@ -19,10 +20,11 @@ export default function TopBar() {
                 </div>
             </Link>  
             <div className="flex items-center gap-2">
-                <Avatar className="h-10 w-10 border">
+                {data?.user.image && <Avatar className="h-10 w-10 border hidden sm:block">
                     <AvatarImage src={data?.user.image || `/placeholder.svg?height=48&width=48`} alt={data?.user?.name!} />
                     <AvatarFallback>{data?.user.name!.substring(0, 2).toUpperCase()}</AvatarFallback>
-                </Avatar>
+                </Avatar>}
+                <PageToggle />
                 {path != '/' && <ModeToggle />}
                 <Button onClick={() => status == "authenticated" ? signOut() : status == "unauthenticated" ? redirect('/home') : null}>
                     {status == "authenticated" ? "Sign Out" : status == "unauthenticated" ? "Sign in" : <Loader2 className="animate-spin"/>}
