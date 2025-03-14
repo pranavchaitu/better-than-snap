@@ -1,10 +1,10 @@
 "use client"
 
-import { signIn, signOut, useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import { Button } from "./ui/button"
 import { ModeToggle } from "./mode-toggle"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { redirect, usePathname } from "next/navigation"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Loader2 } from "lucide-react"
 
@@ -24,7 +24,7 @@ export default function TopBar() {
                     <AvatarFallback>{data?.user.name!.substring(0, 2).toUpperCase()}</AvatarFallback>
                 </Avatar>
                 {path != '/' && <ModeToggle />}
-                <Button onClick={() => status == "authenticated" ? signOut() : status == "unauthenticated" ? signIn() : null}>
+                <Button onClick={() => status == "authenticated" ? signOut() : status == "unauthenticated" ? redirect('/home') : null}>
                     {status == "authenticated" ? "Sign Out" : status == "unauthenticated" ? "Sign in" : <Loader2 className="animate-spin"/>}
                 </Button>
             </div>

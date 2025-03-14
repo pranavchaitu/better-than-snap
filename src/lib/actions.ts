@@ -18,13 +18,19 @@ export async function findUser(email : string) {
 }
 
 export async function createUser(body : CreateUserPayload) {
-    return await prisma.user.create({
-        data : {
-            email : body.email,
-            profileUrl : body.profileUrl,
-            username : body.name
-        }
-    })
+    try {        
+        return await prisma.user.create({
+            data : {
+                email : body.email,
+                profileUrl : body.profileUrl,
+                username : body.name
+            }
+        })
+    } catch (error) {
+        console.log(error)
+        console.log('error creating user')
+        return null
+    }
 }
 
 export async function getPosts() {
@@ -51,10 +57,8 @@ export async function getPosts() {
             isSaved : post.savedBy.some(user => user.id == userId)
         }))
     } catch (error) {
-        return {
-            error,
-            message : "error fetching posts"
-        }
+        console.log(error)
+        return []
     }
 }
 
@@ -85,10 +89,8 @@ export async function getPostsById(id : string) {
             isSaved : post.savedBy.some(user => user.id == userId) 
         }))
     } catch (error) {
-        return {
-            error,
-            message : "error fetching posts"
-        }
+        console.log(error)
+        return []
     }
 }
 
@@ -218,15 +220,13 @@ export async function getAllSavedPosts() {
                 }
             }
         })
-        const posts = res?.savedPosts
-        return posts?.map(post => ({
+        const posts = res?.savedPosts || []
+        return posts.map(post => ({
             ...post,
             isSaved : true
         }))
     } catch (error) {
-        return {
-            error,
-            message : "error fetching posts"
-        }
+        console.log(error)
+        return []
     }
 }

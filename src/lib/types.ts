@@ -14,8 +14,3 @@ export type PostCardType = {
     },
     isSaved : boolean
 }
-
-export type PostCardListType = PostCardType[] | {
-    error : unknown,
-    message : string
-}

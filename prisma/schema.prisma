@@ -17,7 +17,7 @@ model User {
   id           String @id @default(uuid())
   name         String?
   username     String
-  email        String
+  email        String @unique
   profileUrl   String
   savedPosts   Post[] @relation("UserSavedPosts")
   createdPosts Post[] @relation("UserCreatedPosts")

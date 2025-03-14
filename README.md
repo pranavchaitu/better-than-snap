@@ -6,6 +6,7 @@ Feautures :
     - profile edit
     - me issue
 (Next)
+    - phone bar
     - photo showcase dialog
     - user search
     - gallery share
@@ -14,7 +15,8 @@ Feautures :
     - like relation not just count
     - delete feature
 (Bugs)
-    - toast error on fetch 
+    - landing profile and sign in button (trivial)
+    - user intial creation - to test again (working for now)
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 

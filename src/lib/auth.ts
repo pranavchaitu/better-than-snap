@@ -25,7 +25,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token,account,profile }) {
       if(account?.provider == 'google') {
         let currentUser = await findUser(profile?.email!)
-        if(currentUser) {
+        if(currentUser?.id) {
           token.id = currentUser.id
         } else {
           let newUser = await createUser({
@@ -33,33 +33,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             email : profile?.email!,
             profileUrl : profile?.picture!
           });
-          token.id = newUser.id
+          if(newUser) token.id = newUser.id
         }
       }
       return token
-      //   let user = await client.user.findFirst({
-      //     where : {
-      //       email : profile?.email!
-      //     }
-      //   })
-      //   if(!user?.id) { 
-      //     try {            
-      //       const newUser = await client.user.create({
-      //         data : {
-      //           email : profile?.email!,
-      //           profileUrl : profile?.picture,
-      //           username : profile?.name!
-      //         }
-      //       })
-      //       token.id = newUser.id
-      //     } catch (error) {
-      //       console.log(error)
-      //     }
-      //   } else {
-      //     token.id = user?.id
-      //   }
-      // }
-      // return token
     },
     session({ session,token } : any) {
       session.user.id = token.id

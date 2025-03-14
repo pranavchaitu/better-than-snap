@@ -1,21 +1,18 @@
 "use client"
 
-import { PostCardListType } from "@/lib/types";
+import { PostCardType } from "@/lib/types";
 import { PostCard } from "../post-card";
 import { toast } from "sonner";
-import { redirect } from "next/navigation";
 
 export function PostCardList({ posts,title } : {
-    posts : PostCardListType,
+    posts : PostCardType[],
     title? : string
 }) {
-    if ("error" in posts) {
-        toast.error(posts.message)
-        return redirect('/home')
-    }
-    if(!posts.length) {
-        toast.error("User has no posts.")
-        return redirect('/home')
+    if(posts && !posts.length) {
+        toast.error("no single post.")
+        return <main className="container ml-4 py-8 px-4 space-y-4">
+            <h1 className="text-center text-3xl font-bold mb-6">No posts!</h1>
+        </main>
     }
     return <main className="container ml-4 py-8 px-4 space-y-4">
         {title?.length && <h1 className="text-center text-3xl font-bold mb-6">{title}</h1>}

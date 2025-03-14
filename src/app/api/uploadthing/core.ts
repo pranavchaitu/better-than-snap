@@ -14,27 +14,22 @@ export const ourFileRouter = {
   })
     .middleware(async ({ req }) => {
       const data = await auth();
-      
       if (!data) throw new UploadThingError("Unauthorized");
       return { userId: data.user.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
-      console.log("Upload complete for userId:", metadata.userId);
+      // console.log("Upload complete for userId:", metadata.userId);
 
-      console.log("file url", file.ufsUrl);
-      try {        
-        const post = await prisma.post.create({
-          data : {
-            url : file.ufsUrl,
-            userID : metadata.userId,
-          }
-        })
-        return { 
-          url : post.url,
-        };
-      } catch (error) {
-        console.log(error)
-      }
+      // console.log("file url", file.ufsUrl);
+      const post = await prisma.post.create({
+        data : {
+          url : file.ufsUrl,
+          userID : metadata.userId,
+        }
+      })
+      return { 
+        ufsUrl : post.url
+      };
 
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
     }),

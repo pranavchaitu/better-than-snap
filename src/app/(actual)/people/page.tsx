@@ -1,5 +1,7 @@
 import { UserProfileList } from "@/components/user-profile-list";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
     return (
         <main className="container ml-4 py-8 px-4">
