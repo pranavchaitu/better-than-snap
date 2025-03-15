@@ -32,7 +32,7 @@ export function UserProfileCard({
             <AvatarFallback>{username.substring(0, 2).toUpperCase()}</AvatarFallback>
           </Avatar>
           <div className="flex-1 space-y-1">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+            <div className="flex items-center justify-between gap-2">
               <div>
                 <h3 className="font-semibold leading-none">{username}</h3>
                 {/* <p className="text-sm text-muted-foreground">@{username}</p> */}

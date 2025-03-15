@@ -6,7 +6,6 @@ Feautures :
     - profile edit
     - me issue
 (Next)
-    - phone bar
     - photo showcase dialog
     - user search
     - gallery share
