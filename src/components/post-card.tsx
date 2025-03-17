@@ -3,7 +3,7 @@
 import { decreaseLikes, increaseLikes, savePost, unsavePost } from "@/lib/actions";
 import { Bookmark, Heart } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { toast } from "sonner";
 
 export function PostCard({ id, url, likeCount, profileUrl, username, isSaved } : {
@@ -17,27 +17,32 @@ export function PostCard({ id, url, likeCount, profileUrl, username, isSaved } :
     const [liked, setLiked] = useState(false)
     const [saved, setSaved] = useState(isSaved)
     const [likes, setLikes] = useState(likeCount)
-    const likePost = async () => {
+    
+    const likePost = async (e : MouseEvent) => {
+        e.preventDefault()
         setLiked(true)
         setLikes(likes+1)
         await increaseLikes(id)
         toast.success("Liked the post <3.")
     }   
     
-    const dislikePost = async () => {
+    const dislikePost = async (e : MouseEvent) => {
+        e.preventDefault()
         setLiked(false)
         setLikes(likes-1)
         await decreaseLikes(id)
         toast.success("Disliked the post.")
     }
 
-    const selectSave = async () => {
+    const selectSave = async (e : MouseEvent) => {
+        e.preventDefault()
         setSaved(true)
         await savePost(id)
         toast.success("Post Saved!")
     }
 
-    const deselectSave = async () => {
+    const deselectSave = async (e : MouseEvent) => {
+        e.preventDefault()
         setSaved(false)
         await unsavePost(id)
         toast.success("Post Unsaved!")
@@ -63,26 +68,26 @@ export function PostCard({ id, url, likeCount, profileUrl, username, isSaved } :
                             src={`${profileUrl}`}
                             className="h-10 w-10 rounded-full border-2 object-cover"
                         />
-                        <div className="flex flex-col">
-                        <p className="font-normal text-base text-gray-50 relative z-10">
-                            {username}
-                        </p>
-                        <p className="text-sm text-gray-400">2 min ago</p>
+                        <div className="flex flex-col items-start">
+                            <p className="font-normal text-base text-gray-50 relative z-10">
+                                {username}
+                            </p>
+                            <p className="text-sm text-gray-400">2 min ago</p>
                         </div>
                     </div>
-                    <div className="absolute bottom-0 left-0 w-full opacity-0 translate-y-10 transition-all duration-300 ease-in-out group-hover/card:opacity-100 group-hover/card:translate-y-0">
+                    <div className="absolute bottom-0 left-0 w-full opacity-0 translate-y-10 duration-300 transition-all ease-in-out group-hover/card:opacity-100 group-hover/card:translate-y-0">
                         <div className="flex p-4 justify-between bg-gray-900">
                             <div className="space-x-2 flex items-center">
                                 <Heart 
-                                    onClick={liked ? dislikePost : likePost} 
+                                    onClick={(e) => liked ? dislikePost(e) : likePost(e)} 
                                     className={`cursor-pointer transition-all duration-300 ${liked ? "text-red-500" : "text-white"}`}
                                 />
-                                <span>
+                                <span className="text-white">
                                     {likes}
                                 </span>
                             </div>
                             <Bookmark 
-                                onClick={saved ? deselectSave : selectSave} 
+                                onClick={(e) => saved ? deselectSave(e) : selectSave(e)} 
                                 className={`cursor-pointer transition-all duration-300 ${saved ? "text-yellow-400" : "text-white"}`}
                             />
                         </div>
@@ -115,4 +120,3 @@ export function PostCard({ id, url, likeCount, profileUrl, username, isSaved } :
 //         </div>
 //     </>
 // }
-

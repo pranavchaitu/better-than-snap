@@ -6,10 +6,7 @@ Feautures :
     - profile edit
     - me issue
 (Next)
-    - photo showcase dialog
-    - user search
     - gallery share
-        (today)
     - learn transitions
     - like relation not just count
     - delete feature

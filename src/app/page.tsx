@@ -28,16 +28,16 @@ export default function Home() {
           </div>
           <div className="flex items-center justify-center mt-5">
             <Link href="/home">
-              <div className="text-lg bg-zinc-800 shadow-md px-4 py-2 rounded-2xl">
+              <div className="text-lg text-white bg-zinc-800 shadow-md px-4 py-2 rounded-2xl">
                 start uploading
               </div>
             </Link>
           </div>
         </div>
         <footer className="flex items-end justify-center">
-          <div className="px-6 py-2 shadow-md rounded-t-2xl bg-zinc-800">
-            Designed & Developed by <Button className="p-0 ml-1" variant={'link'}>
-            <a href="https://x.com/bestsoldev" target="_blank">@pranav</a>
+          <div className="px-6 py-2 text-white shadow-md rounded-t-2xl bg-zinc-800">
+            Designed & Developed by <Button className="text-white p-0 ml-1" variant={'link'}>
+            <a href="https://x.com/pranavchaitu" target="_blank">@pranav</a>
             </Button>
           </div>
         </footer>

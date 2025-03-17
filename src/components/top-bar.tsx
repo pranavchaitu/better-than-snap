@@ -15,7 +15,7 @@ export default function TopBar() {
     return (
         <div className="p-4 rounded-2xl fixed z-30 bg-transparent backdrop-blur-lg w-screen max-w-screen-md bg-blur flex items-center justify-between gap-2">
             <Link href={status == "authenticated" ? '/home' : status == "unauthenticated" ? '/' : ''}>
-                <div className="cursor-pointer">
+                <div className={`cursor-pointer ${path == '/' && "text-white"}`}>
                     Snapweb.
                 </div>
             </Link>  
@@ -30,7 +30,7 @@ export default function TopBar() {
                         <ModeToggle />
                     </>
                 )}
-                <Button onClick={() => status == "authenticated" ? signOut() : status == "unauthenticated" ? signIn() : null}>
+                <Button className={`${path == '/' && "text-black bg-white hover:bg-white/90"}`} onClick={() => status == "authenticated" ? signOut() : status == "unauthenticated" ? signIn() : null}>
                     {status == "authenticated" ? "Sign Out" : status == "unauthenticated" ? "Sign in" : <Loader2 className="animate-spin"/>}
                 </Button>
             </div>

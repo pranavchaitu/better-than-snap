@@ -13,5 +13,10 @@ export default async function Home({ params } : {
     const { slug } = await params
     const userId = slug[0]
     const userPosts = await getPostsById(userId)
-    return <PostCardList posts={userPosts} title={`All posts by ${userId}`}/>
+    if(userPosts && !userPosts.length) {
+        return <main className="container ml-4 py-8 px-4 space-y-4">
+            <h1 className="text-center text-3xl font-bold mb-6">No posts!</h1>
+        </main>
+    }
+    return <PostCardList posts={userPosts} title={`All posts by ${userPosts[0].creator.username}`} />
 }

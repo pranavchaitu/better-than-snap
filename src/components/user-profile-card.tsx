@@ -26,7 +26,7 @@ export function UserProfileCard({
   return (
     <Card className="overflow-hidden transition-all hover:shadow-md">
       <CardContent className="px-4"> 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 ">
           <Avatar className="h-12 w-12 border">
             <AvatarImage src={avatar || `/placeholder.svg?height=48&width=48`} alt={username} />
             <AvatarFallback>{username.substring(0, 2).toUpperCase()}</AvatarFallback>
@@ -34,7 +34,7 @@ export function UserProfileCard({
           <div className="flex-1 space-y-1">
             <div className="flex items-center justify-between gap-2">
               <div>
-                <h3 className="font-semibold leading-none">{username}</h3>
+                <h2 `className="font-semibold leading-none">{username}</h2>
                 {/* <p className="text-sm text-muted-foreground">@{username}</p> */}
               </div>
               <Link href={`profile/${id}`}>

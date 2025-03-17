@@ -105,10 +105,8 @@ export async function getUsers() {
         })
         return users
     } catch (error : any) {
-        return {
-            error,
-            message : "error fetching users"
-        }
+        console.log(error)
+        return []
     }
 }
 

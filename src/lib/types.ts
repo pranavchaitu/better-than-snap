@@ -4,6 +4,12 @@ export type CreateUserPayload = {
     name : string
 }
 
+export type UserPayload = {
+    username: string;
+    id: string;
+    profileUrl: string;
+}
+
 export type PostCardType = {
     id : string
     url : string,
