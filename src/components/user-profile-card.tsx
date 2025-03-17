@@ -34,7 +34,7 @@ export function UserProfileCard({
           <div className="flex-1 space-y-1">
             <div className="flex items-center justify-between gap-2">
               <div>
-                <h2 `className="font-semibold leading-none">{username}</h2>
+                <h3 className="font-semibold leading-none">{username}</h3>
                 {/* <p className="text-sm text-muted-foreground">@{username}</p> */}
               </div>
               <Link href={`profile/${id}`}>
