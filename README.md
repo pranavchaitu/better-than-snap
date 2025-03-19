@@ -6,8 +6,8 @@ Feautures :
     - profile edit
     - me issue
 (Next)
-    - gallery share
-    - learn transitions
+    - learn transitions again
+        (today)
     - like relation not just count
     - delete feature
 (Bugs)

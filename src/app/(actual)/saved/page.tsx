@@ -1,4 +1,4 @@
-import { PostCardList } from "@/components/ui/post-card-list"
+import { PostCardList } from "@/components/post-card-list"
 import { getAllSavedPosts } from "@/lib/actions"
 
 export const dynamic = "force-dynamic";

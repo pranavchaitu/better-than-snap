@@ -1,4 +1,4 @@
-import { PostCardList } from "@/components/ui/post-card-list"
+import { PostCardList } from "@/components/post-card-list"
 import { getPostsById } from "@/lib/actions"
 
 type Params = {
@@ -18,5 +18,5 @@ export default async function Home({ params } : {
             <h1 className="text-center text-3xl font-bold mb-6">No posts!</h1>
         </main>
     }
-    return <PostCardList posts={userPosts} title={`All posts by ${userPosts[0].creator.username}`} />
+    return <PostCardList posts={userPosts} userId={userId} username={userPosts[0].creator.username} />
 }
